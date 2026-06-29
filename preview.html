@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Here to make your stories legendary</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #EFF3EF;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #000;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 48px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo {
+      width: 48px;
+      height: 47px;
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 56px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #000;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a.active {
+      font-weight: 700;
+    }
+
+    .contact-btn {
+      border: 1px solid #000;
+      border-radius: 999px;
+      padding: 10px 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .contact-btn:hover {
+      background-color: #000;
+      color: #EFF3EF;
+    }
+
+    /* ---------- HERO / CANVAS ---------- */
+    .hero {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #particle-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* ---------- FOOTER ARROW ---------- */
+    .scroll-arrow {
+      position: absolute;
+      bottom: 40px;
+      right: 48px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: #1a1b3a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      transition: transform 0.3s ease;
+    }
+
+    .scroll-arrow:hover {
+      transform: scale(1.1) rotate(-10deg);
+    }
+
+    .scroll-arrow svg {
+      width: 20px;
+      height: 20px;
+      stroke: #EFF3EF;
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 20px 24px; }
+      nav { gap: 24px; }
+      nav a span.label { display: none; }
+      .scroll-arrow { bottom: 24px; right: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <svg class="logo" width="48" height="47" viewBox="0 0 48 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40.2978 6.8251C35.8381 2.42427 29.9113 0 23.6056 0C17.2999 0 11.3731 2.42293 6.91345 6.8251C2.45652 11.2259 0 17.0781 0 23.3045C0 29.5309 2.45652 35.383 6.91345 39.7866C11.3704 44.1874 17.2999 46.6116 23.6056 46.6116C29.9113 46.6116 35.8381 44.1887 40.2978 39.7866C44.7547 35.3857 47.2099 29.5309 47.2099 23.3045C47.2099 17.0781 44.756 11.2259 40.2978 6.8251ZM23.6056 40.1915C14.1734 40.1915 6.50064 32.6167 6.50064 23.3032C6.50064 13.9896 14.1747 6.41749 23.6056 6.41749C33.0365 6.41749 40.7092 13.9923 40.7092 23.3032C40.7092 32.614 33.0351 40.1915 23.6056 40.1915Z" fill="black"/>
+    <path d="M27.1246 23.815L33.5589 24.4551C32.981 29.3905 28.7068 33.19 23.6164 33.19C18.0943 33.19 13.6036 28.7544 13.6036 23.3032C13.6036 17.8519 18.0943 13.419 23.6164 13.419C28.7068 13.419 32.9796 17.2184 33.5589 22.1538L27.1246 22.79C26.8728 21.1047 25.3962 19.8044 23.6164 19.8044C21.6607 19.8044 20.069 21.3734 20.069 23.3032C20.069 25.2329 21.6607 26.8032 23.6164 26.8032C25.3962 26.8032 26.8728 25.5029 27.1246 23.8137V23.815Z" fill="black"/>
+  </svg>
+
+  <nav>
+    <a href="#">L'agence</a>
+    <a href="#" class="active">
+      <span class="label">Expertises</span>
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 1L9 9M9 9V2M9 9H2" stroke="black" stroke-width="1.5"/></svg>
+    </a>
+    <a href="#">Projets</a>
+    <a href="#" class="contact-btn">
+      Contact
+      <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="currentColor" stroke-width="1.3"/></svg>
+    </a>
+  </nav>
+</header>
+
+<div class="hero">
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="scroll-arrow" aria-label="Scroll down">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 7L17 17M17 17V8M17 17H8"/>
+    </svg>
+  </div>
+</div>
+
+<script>
+(() => {
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d', { alpha: true });
+
+  const BG_COLOR = '#EFF3EF';
+
+  const ACCENT_COLORS = [
+    { r: 178, g: 58,  b: 255 },
+    { r: 90,  g: 80,  b: 255 },
+    { r: 0,   g: 180, b: 255 },
+    { r: 220, g: 120, b: 255 },
+  ];
+
+  let DPR = window.devicePixelRatio || 1;
+  let W = 0, H = 0;
+  let particles = [];
+  let mouse = { x: -9999, y: -9999, prevX: -9999, prevY: -9999, active: false };
+  let mouseVelX = 0, mouseVelY = 0;
+
+  const INFLUENCE_RADIUS = 65;     // ✅ zone plus petite (était 120)
+  const PUSH_STRENGTH    = 14;
+  const DRIFT_FRICTION   = 0.96;
+  const SETTLE_SPEED     = 0.012;
+  const FLOAT_NOISE      = 0.12;
+
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    const hero = canvas.parentElement;
+    W = hero.clientWidth;
+    H = hero.clientHeight;
+    canvas.width  = W * DPR;
+    canvas.height = H * DPR;
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    buildParticles();
+  }
+
+  let textLayer = null;
+
+  function drawTextTo(targetCtx, width, height) {
+    const fittingLine = 'HERE TO MAKE';
+    targetCtx.font = `700 100px "Helvetica Neue", Helvetica, Arial, sans-serif`;
+    const baseMetric  = targetCtx.measureText(fittingLine).width;
+    const targetWidth = width * 1.08;
+    let fontSize = (targetWidth / baseMetric) * 100;
+    if (width < 768) fontSize = Math.min(fontSize, width * 0.18);
+
+    const lineHeight    = fontSize * 0.92;
+    targetCtx.fillStyle    = '#000';
+    targetCtx.textBaseline = 'alphabetic';
+    targetCtx.font = `700 ${fontSize}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
+
+    const totalHeight   = lineHeight * 3;
+    const firstBaseline = (height - totalHeight) / 2 + fontSize * 0.85;
+    const leftBleed     = -fontSize * 0.08;
+
+    const legendaryText  = 'LEGENDARY';
+    const legendaryWidth = targetCtx.measureText(legendaryText).width;
+    const legendaryX     = width - legendaryWidth + fontSize * 0.08;
+
+    targetCtx.fillText('HERE TO MAKE', leftBleed,    firstBaseline);
+    targetCtx.fillText('YOUR STORIES', leftBleed,    firstBaseline + lineHeight);
+    targetCtx.fillText('LEGENDARY',    legendaryX,   firstBaseline + lineHeight * 2);
+  }
+
+  function buildParticles() {
+    textLayer = document.createElement('canvas');
+    textLayer.width  = W * DPR;
+    textLayer.height = H * DPR;
+    const tlCtx = textLayer.getContext('2d');
+    tlCtx.scale(DPR, DPR);
+    drawTextTo(tlCtx, W, H);
+
+    const off  = document.createElement('canvas');
+    off.width  = W;
+    off.height = H;
+    const octx = off.getContext('2d');
+    drawTextTo(octx, W, H);
+
+    const imgData = octx.getImageData(0, 0, W, H).data;
+    const step    = 2;
+    const next    = [];
+
+    for (let y = 0; y < H; y += step) {
+      for (let x = 0; x < W; x += step) {
+        const idx   = (y * W + x) * 4;
+        const alpha = imgData[idx + 3];
+        const r     = imgData[idx];
+        if (alpha > 128 && r < 80) {
+          next.push({
+            hx: x, hy: y, x, y,
+            vx: 0, vy: 0,
+            color: ACCENT_COLORS[(Math.random() * ACCENT_COLORS.length) | 0],
+            colorIntensity: 0,
+          });
+        }
+      }
+    }
+    particles = next;
+  }
+
+  function onMouseMove(e) {
+    const rect  = canvas.getBoundingClientRect();
+    mouse.prevX = mouse.x;
+    mouse.prevY = mouse.y;
+    const nx    = e.clientX - rect.left;
+    const ny    = e.clientY - rect.top;
+    mouseVelX   = nx - mouse.x;
+    mouseVelY   = ny - mouse.y;
+    mouse.x     = nx;
+    mouse.y     = ny;
+    mouse.active = true;
+  }
+
+  function onMouseLeave() {
+    mouse.x = -9999; mouse.y = -9999;
+    mouse.active = false;
+    mouseVelX = 0; mouseVelY = 0;
+  }
+
+  function onTouchMove(e) {
+    if (e.touches.length > 0) {
+      const rect = canvas.getBoundingClientRect();
+      const t    = e.touches[0];
+      mouse.prevX = mouse.x; mouse.prevY = mouse.y;
+      const nx = t.clientX - rect.left;
+      const ny = t.clientY - rect.top;
+      mouseVelX = nx - mouse.x;
+      mouseVelY = ny - mouse.y;
+      mouse.x = nx; mouse.y = ny;
+      mouse.active = true;
+    }
+  }
+
+  function onTouchEnd() {
+    mouse.x = -9999; mouse.y = -9999;
+    mouse.active = false;
+  }
+
+  function animate() {
+    ctx.fillStyle = BG_COLOR;
+    ctx.fillRect(0, 0, W, H);
+
+    if (textLayer) ctx.drawImage(textLayer, 0, 0, W, H);
+
+    const moveMag  = Math.hypot(mouseVelX, mouseVelY);
+    const moveDirX = moveMag > 0.01 ? mouseVelX / moveMag : 0;
+    const moveDirY = moveMag > 0.01 ? mouseVelY / moveMag : 0;
+
+    const active = [];
+
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+
+      if (mouse.active) {
+        const dx   = p.x - mouse.x;
+        const dy   = p.y - mouse.y;
+        const dSq  = dx * dx + dy * dy;
+        const rSq  = INFLUENCE_RADIUS * INFLUENCE_RADIUS;
+
+        if (dSq < rSq) {
+          const d    = Math.sqrt(dSq) || 0.001;
+          const norm = d / INFLUENCE_RADIUS;
+          // ✅ falloff plus doux : force concentrée au centre, quasi nulle au bord (était -3.2)
+          const force = Math.exp(-5.5 * norm * norm);
+
+          p.vx += (dx / d) * PUSH_STRENGTH * force
+                + moveDirX * Math.min(moveMag * 0.3, 8) * force
+                + (Math.random() - 0.5) * 1.6 * force;
+          p.vy += (dy / d) * PUSH_STRENGTH * force
+                + moveDirY * Math.min(moveMag * 0.3, 8) * force
+                + (Math.random() - 0.5) * 1.6 * force;
+
+          p.colorIntensity = Math.min(1, p.colorIntensity + force * 0.6);
+        }
+      }
+
+      const homeDx      = p.hx - p.x;
+      const homeDy      = p.hy - p.y;
+      const distFromHome = Math.hypot(homeDx, homeDy);
+
+      if (distFromHome > 1) {
+        const noise = Math.min(distFromHome / 60, 1) * FLOAT_NOISE;
+        p.vx += (Math.random() - 0.5) * noise;
+        p.vy += (Math.random() - 0.5) * noise;
+      }
+
+      p.vx *= DRIFT_FRICTION;
+      p.vy *= DRIFT_FRICTION;
+      p.x  += p.vx;
+      p.y  += p.vy;
+
+      const speed = Math.hypot(p.vx, p.vy);
+      if (speed < 0.8 && distFromHome > 0.2) {
+        let sf = SETTLE_SPEED * (1 - speed / 0.8);
+        if (distFromHome < 20) {
+          sf += Math.pow(1 - distFromHome / 20, 2.2) * 0.5;
+        }
+        p.x += homeDx * sf;
+        p.y += homeDy * sf;
+      }
+
+      p.colorIntensity *= distFromHome < 2 ? 0.9 : 0.992;
+
+      if (distFromHome > 3) active.push({ p, distFromHome });
+    }
+
+    // Effacement progressif : fondu très graduel → bord flou (était / 9)
+    if (active.length) {
+      for (const { p, distFromHome } of active) {
+        // ✅ transition sur 22 px au lieu de 9 → bord beaucoup plus doux
+        ctx.globalAlpha = Math.min((distFromHome - 3) / 22, 1);
+        ctx.fillStyle   = BG_COLOR;
+        ctx.fillRect(p.hx - 0.5, p.hy - 0.5, 3, 3);
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    // Halos chromatiques (écran)
+    if (mouse.active) {
+      const lr = INFLUENCE_RADIUS * 2.0;
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
+      ctx.filter = 'blur(10px)';
+
+      for (const h of [
+        { color: 'rgba(190, 50, 255, 0.75)',  ox: -18, oy: -10, rMul: 0.95 },
+        { color: 'rgba(80, 110, 255, 0.70)',  ox:  20, oy:   6, rMul: 1.05 },
+        { color: 'rgba(0, 210, 255, 0.55)',   ox:   6, oy:  20, rMul: 0.85 },
+        { color: 'rgba(255, 100, 220, 0.55)', ox: -10, oy:  16, rMul: 1.15 },
+      ]) {
+        const r  = lr * h.rMul;
+        const cx = mouse.x + h.ox;
+        const cy = mouse.y + h.oy;
+        const g  = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+        g.addColorStop(0,    h.color);
+        g.addColorStop(0.4,  h.color.replace(/[\d.]+\)$/, '0.25)'));
+        g.addColorStop(0.75, h.color.replace(/[\d.]+\)$/, '0.05)'));
+        g.addColorStop(1,    'rgba(0,0,0,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+      }
+
+      const cR  = INFLUENCE_RADIUS * 0.55;
+      const cg  = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, cR);
+      cg.addColorStop(0,   'rgba(255,255,255,0.55)');
+      cg.addColorStop(0.4, 'rgba(255,255,255,0.15)');
+      cg.addColorStop(1,   'rgba(255,255,255,0)');
+      ctx.fillStyle = cg;
+      ctx.fillRect(mouse.x - cR, mouse.y - cR, cR * 2, cR * 2);
+      ctx.restore();
+    }
+
+    // Particules volantes
+    for (const { p } of active) {
+      const ci = p.colorIntensity;
+      if (ci < 0.02) {
+        ctx.fillStyle = '#000';
+      } else {
+        const { r, g, b } = p.color;
+        ctx.fillStyle = `rgb(${r * ci | 0},${g * ci | 0},${b * ci | 0})`;
+      }
+      ctx.fillRect(p.x | 0, p.y | 0, 1.2, 1.2);
+    }
+
+    // Aberration chromatique dynamique
+    if (mouse.active) {
+      const lr    = INFLUENCE_RADIUS * 1.4;
+      const angle = Math.atan2(mouseVelY, mouseVelX);
+      const ol    = 6 + Math.min(Math.hypot(mouseVelX, mouseVelY) * 0.4, 12);
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
+
+      for (const l of [
+        { x: mouse.x + Math.cos(angle) * ol,                           y: mouse.y + Math.sin(angle) * ol,                           color: 'rgba(178,58,255,0.55)' },
+        { x: mouse.x - Math.cos(angle) * ol,                           y: mouse.y - Math.sin(angle) * ol,                           color: 'rgba(70,90,255,0.5)'   },
+        { x: mouse.x + Math.cos(angle + Math.PI/2) * ol * 0.6,        y: mouse.y + Math.sin(angle + Math.PI/2) * ol * 0.6,         color: 'rgba(0,200,255,0.4)'   },
+      ]) {
+        const g = ctx.createRadialGradient(l.x, l.y, 0, l.x, l.y, lr);
+        g.addColorStop(0,    l.color);
+        g.addColorStop(0.35, l.color.replace(/[\d.]+\)$/, '0.18)'));
+        g.addColorStop(1,    'rgba(0,0,0,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(l.x - lr, l.y - lr, lr * 2, lr * 2);
+      }
+
+      const cg = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 40);
+      cg.addColorStop(0, 'rgba(255,240,255,0.35)');
+      cg.addColorStop(1, 'rgba(255,240,255,0)');
+      ctx.fillStyle = cg;
+      ctx.fillRect(mouse.x - 40, mouse.y - 40, 80, 80);
+      ctx.restore();
+    }
+
+    mouseVelX *= 0.8;
+    mouseVelY *= 0.8;
+    requestAnimationFrame(animate);
+  }
+
+  function start() { resize(); animate(); }
+
+  window.addEventListener('resize', () => {
+    clearTimeout(window._rTO);
+    window._rTO = setTimeout(resize, 120);
+  });
+  canvas.addEventListener('mousemove',  onMouseMove);
+  canvas.addEventListener('mouseleave', onMouseLeave);
+  canvas.addEventListener('touchmove',  onTouchMove, { passive: true });
+  canvas.addEventListener('touchend',   onTouchEnd);
+
+  document.fonts?.ready ? document.fonts.ready.then(start) : start();
+})();
+</script>
+</body>
+</html>
