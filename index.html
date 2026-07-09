@@ -89,6 +89,7 @@
       font-weight: 600;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      text-decoration: none;
       color: #191A1E;
       background-color: transparent;
       transition: background-color 0.3s ease, color 0.3s ease;
@@ -265,6 +266,12 @@
       animation: holoShift 24s linear infinite;
     }
 
+    /* mot retourné verticalement (clin d'oeil au sens du mot) */
+    .flip-v {
+      display: inline-block;
+      transform: scaleY(-1);
+    }
+
     @keyframes holoShift {
       0%   { background-position: 0% 50%; }
       100% { background-position: 300% 50%; }
@@ -274,9 +281,13 @@
       .holo { animation: none; }
     }
 
-    .exp-text {
+    .exp-intro {
       max-width: 560px;
-      margin: 0 0 110px auto;
+      margin: 0 0 clamp(56px, 8vh, 96px) auto;
+    }
+
+    .exp-text {
+      margin: 0 0 24px;
       font-size: clamp(15px, 1.15vw, 18px);
       line-height: 1.65;
     }
@@ -309,7 +320,7 @@
 
     .exp-list .lbl {
       flex: 1;
-      font-size: clamp(22px, 3.4vw, 46px);
+      font-size: clamp(22px, 3.4vw, 34px);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: -0.015em;
@@ -338,11 +349,16 @@
       transform: translateX(12px);
     }
 
+    /* bouton CTA de la section expertise (même style que le bouton Contact du header) */
+    .exp-cta {
+      margin-top: 4px;
+    }
+
     /* ---------- SECTION PROJETS (vignettes paysage, tailles variées + parallaxe) ---------- */
     .projects {
       position: relative;
       border-top: 1px solid #191A1E;
-      min-height: 255vh;
+      min-height: 262vh;
       padding: 80px 24px;
     }
 
@@ -489,10 +505,10 @@
     /* bord intérieur ancré près du centre (écart toujours positif) + décalages variés */
     .proj-card--1 { top: 3vh;     right: calc(50% + 2vw); width: min(60vh, 45vw); } /* grand */
     .proj-card--2 { top: 18vh;    left:  calc(50% + 5vw); width: min(37vh, 28vw); } /* petit */
-    .proj-card--3 { top: 114vh;   right: calc(50% + 5vw); width: min(45vh, 34vw); } /* moyen */
-    .proj-card--4 { top: 111vh;   left:  calc(50% + 2vw); width: min(58vh, 44vw); } /* grand */
-    .proj-card--5 { top: 170vh;   right: calc(50% + 5vw); width: min(45vh, 34vw); } /* moyen */
-    .proj-card--6 { top: 184vh;   left:  calc(50% + 2vw); width: min(52vh, 40vw); } /* grand */
+    .proj-card--3 { top: 100vh;   right: calc(50% + 5vw); width: min(45vh, 34vw); } /* moyen */
+    .proj-card--4 { top:  97vh;   left:  calc(50% + 2vw); width: min(58vh, 44vw); } /* grand */
+    .proj-card--5 { top: 184vh;   left:  calc(50% + 2vw); width: min(45vh, 34vw); } /* Perfection Habitat, droite */
+    .proj-card--6 { top: 170vh;   right: calc(50% + 5vw); width: min(64vh, 48vw); } /* Intradel, gauche, plus grand */
 
     /* ratios natifs des fichiers (portrait) */
     .proj-card--1 .proj-media { aspect-ratio: 870 / 1070; }
@@ -705,6 +721,16 @@
     .footer-nav a:hover,
     .footer-social a:hover { color: #72ff2d; }
 
+    .footer-col-title {
+      margin: 0;
+      color: #ffffff;
+      opacity: 0.5;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
     .footer-news {
       margin-bottom: clamp(44px, 6vh, 72px);
     }
@@ -775,7 +801,7 @@
       .scroll-arrow { bottom: 24px; right: 24px; }
 
       .expertise { padding: 64px 24px 24px; }
-      .exp-text { margin-bottom: 72px; }
+      .exp-text { margin-bottom: 20px; }
       .exp-list a { gap: 16px; padding: 22px 10px; }
       .exp-list a:hover { padding-left: 18px; }
       .exp-list .ar { width: 22px; }
@@ -933,7 +959,7 @@
       </div>
     </a>
 
-    <a class="proj-card proj-card--5" href="#" data-speed="120" aria-label="Projet Perfection Habitat">
+    <a class="proj-card proj-card--5" href="#" data-speed="-90" aria-label="Projet Perfection Habitat">
       <div class="proj-media">
         <img src="assets/vignette-perfection-habitat.png" alt="Projet Perfection Habitat">
       </div>
@@ -943,7 +969,7 @@
       </div>
     </a>
 
-    <a class="proj-card proj-card--6" href="#" data-speed="-115" aria-label="Projet Intradel">
+    <a class="proj-card proj-card--6" href="#" data-speed="95" aria-label="Projet Intradel">
       <div class="proj-media">
         <img src="assets/vignette-intradel.png" alt="Projet Intradel">
       </div>
@@ -961,8 +987,17 @@
 
 <section class="expertise" id="expertise">
   <div class="exp-tag">(01) — Nos expertises</div>
-  <h2 class="exp-title">Découvrez comment<br>nous allons <span class="holo">retourner</span><br>votre univers</h2>
+  <h2 class="exp-title">Découvrez comment<br>nous allons <span class="holo flip-v">retourner</span><br>votre univers</h2>
+  <div class="exp-intro">
   <p class="exp-text">Chez Cible, nous ne pratiquons pas qu’un seul métier. En fait, nous sommes tous les métiers de la com’ réunis au sein d’une même équipe prête à retourner votre univers. Qu’il s’agisse d’une vidéo badass pour promouvoir votre marque, d’une stratégie digitale taillée pour conquérir vos audiences sur les réseaux sociaux ou encore d’un logo qui rendra jaloux votre voisin (et le reste du monde tant qu’on y est), on vous fait la totale. Et bien plus encore.</p>
+
+  <a href="#" class="pill-btn exp-cta">
+    bouton
+    <span class="icon-circle">
+      <svg width="13" height="13" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="currentColor" stroke-width="1.3"/></svg>
+    </span>
+  </a>
+  </div>
 
   <ul class="exp-list">
     <li>
@@ -1064,24 +1099,26 @@
       <a class="footer-phone" href="tel:+3243878707">+32 4 387 87 07</a>
     </div>
 
-    <nav class="footer-col footer-nav" aria-label="Pages">
-      <a href="#">L'agence</a>
-      <a href="#">Expertises</a>
-      <a href="#">Projets</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <nav class="footer-col footer-nav" aria-label="Ressources">
-      <a href="#">Smile Mag</a>
-      <a href="#">Job</a>
-      <a href="#">Bcorp</a>
-    </nav>
-
     <nav class="footer-col footer-social" aria-label="Réseaux sociaux">
       <a href="#" target="_blank" rel="noopener">Facebook</a>
       <a href="#" target="_blank" rel="noopener">Youtube</a>
       <a href="#" target="_blank" rel="noopener">Instagram</a>
       <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+
+    <nav class="footer-col footer-nav" aria-label="Naviguer">
+      <p class="footer-col-title">Naviguer</p>
+      <a href="#">L'agence</a>
+      <a href="#">Expertises</a>
+      <a href="#">Projets</a>
+      <a href="#contact">Contact</a>
+      <a href="#">Job</a>
+    </nav>
+
+    <nav class="footer-col footer-nav" aria-label="Vous êtes curieux ?">
+      <p class="footer-col-title">Vous êtes curieux ?</p>
+      <a href="#">Smile Mag</a>
+      <a href="#">Bcorp</a>
     </nav>
   </div>
 
