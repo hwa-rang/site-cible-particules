@@ -342,7 +342,7 @@
     .projects {
       position: relative;
       border-top: 1px solid #191A1E;
-      min-height: 178vh;
+      min-height: 255vh;
       padding: 80px 24px;
     }
 
@@ -489,14 +489,18 @@
     /* bord intérieur ancré près du centre (écart toujours positif) + décalages variés */
     .proj-card--1 { top: 3vh;     right: calc(50% + 2vw); width: min(60vh, 45vw); } /* grand */
     .proj-card--2 { top: 18vh;    left:  calc(50% + 5vw); width: min(37vh, 28vw); } /* petit */
-    .proj-card--3 { bottom: 26vh; right: calc(50% + 5vw); width: min(45vh, 34vw); } /* moyen */
-    .proj-card--4 { bottom: 16vh; left:  calc(50% + 2vw); width: min(58vh, 44vw); } /* grand */
+    .proj-card--3 { top: 114vh;   right: calc(50% + 5vw); width: min(45vh, 34vw); } /* moyen */
+    .proj-card--4 { top: 111vh;   left:  calc(50% + 2vw); width: min(58vh, 44vw); } /* grand */
+    .proj-card--5 { top: 170vh;   right: calc(50% + 5vw); width: min(45vh, 34vw); } /* moyen */
+    .proj-card--6 { top: 184vh;   left:  calc(50% + 2vw); width: min(52vh, 40vw); } /* grand */
 
     /* ratios natifs des fichiers (portrait) */
     .proj-card--1 .proj-media { aspect-ratio: 870 / 1070; }
     .proj-card--2 .proj-media { aspect-ratio: 537 / 678;   animation-duration: 9.5s; animation-delay: -2s; }
     .proj-card--3 .proj-media { aspect-ratio: 870 / 978;   animation-duration: 7s;   animation-delay: -4s; }
     .proj-card--4 .proj-media { aspect-ratio: 1170 / 1398; animation-duration: 10s;  animation-delay: -1s; }
+    .proj-card--5 .proj-media { aspect-ratio: 416 / 465;   animation-duration: 8.5s; animation-delay: -3s; }
+    .proj-card--6 .proj-media { aspect-ratio: 997 / 1024;  animation-duration: 9s;   animation-delay: -5s; }
 
     @keyframes floaty {
       0%, 100% { transform: translateY(0); }
@@ -811,7 +815,9 @@
       .proj-card--1,
       .proj-card--2,
       .proj-card--3,
-      .proj-card--4 {
+      .proj-card--4,
+      .proj-card--5,
+      .proj-card--6 {
         position: static;
         top: auto;
         right: auto;
@@ -924,6 +930,26 @@
       <div class="proj-cap">
         <span class="proj-name">Opéra de Liège <svg class="ar" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="currentColor" stroke-width="1"/></svg></span>
         <span class="proj-tags">Événement</span>
+      </div>
+    </a>
+
+    <a class="proj-card proj-card--5" href="#" data-speed="120" aria-label="Projet Perfection Habitat">
+      <div class="proj-media">
+        <img src="assets/vignette-perfection-habitat.png" alt="Projet Perfection Habitat">
+      </div>
+      <div class="proj-cap">
+        <span class="proj-name">Perfection Habitat <svg class="ar" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="currentColor" stroke-width="1"/></svg></span>
+        <span class="proj-tags">Stratégie / Stratégie digitale / Création de contenu / Événement</span>
+      </div>
+    </a>
+
+    <a class="proj-card proj-card--6" href="#" data-speed="-115" aria-label="Projet Intradel">
+      <div class="proj-media">
+        <img src="assets/vignette-intradel.png" alt="Projet Intradel">
+      </div>
+      <div class="proj-cap">
+        <span class="proj-name">Intradel <svg class="ar" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="currentColor" stroke-width="1"/></svg></span>
+        <span class="proj-tags">Création de contenu</span>
       </div>
     </a>
   </div>
