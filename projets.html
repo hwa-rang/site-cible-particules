@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projets — Cible</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      overflow-x: clip;
+      background-color: #E8ECF0;
+      font-family: 'Manrope', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #191A1E;
+    }
+
+    body { position: relative; }
+
+    /* tout le contenu tient dans une grille de 1700px max, centrée */
+    .site-wrap {
+      max-width: 1700px;
+      margin: 0 auto;
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 48px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo {
+      width: 48px;
+      height: 47px;
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 56px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #191A1E;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a.active { font-weight: 700; }
+
+    /* ---------- BOUTON PILULE AVEC PASTILLE ICÔNE ---------- */
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid #191A1E;
+      border-radius: 999px;
+      padding: 5px 6px 5px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #191A1E;
+      background-color: transparent;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .pill-btn .icon-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background-color: #191A1E;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .pill-btn .icon-circle svg { width: 13px; height: 13px; display: block; }
+    .pill-btn:hover { background-color: #191A1E; color: #ffffff; }
+    .pill-btn:hover .icon-circle { background-color: #ffffff; color: #191A1E; }
+
+    /* ---------- MENU EXPERTISES + SOUS-MENU ---------- */
+    .nav-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .nav-item > a { cursor: pointer; user-select: none; }
+    .nav-item > a .arrow-45 { transform: rotate(45deg); transition: transform 0.3s ease; }
+    .nav-item.open > a .arrow-45 { transform: rotate(225deg); }
+
+    .submenu {
+      position: absolute;
+      top: 100%;
+      left: -14px;
+      margin-top: 16px;
+      background-color: #E8ECF0;
+      border: 1px solid #191A1E;
+      border-radius: 16px;
+      padding: 10px 0;
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+      z-index: 20;
+    }
+    .nav-item.open .submenu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .submenu a {
+      padding: 11px 24px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      white-space: nowrap;
+      transition: background-color 0.2s ease;
+    }
+    .submenu a:hover { background-color: rgba(128, 16, 255, 0.08); }
+
+    /* ---------- INTRO DE PAGE ---------- */
+    .page-intro {
+      border-top: 1px solid #191A1E;
+      padding: clamp(70px, 11vh, 130px) 48px clamp(40px, 6vh, 72px);
+    }
+
+    .page-tag {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 30px;
+    }
+
+    .page-title {
+      font-size: clamp(48px, 9vw, 120px);
+      font-weight: 700;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      margin: 0 0 44px;
+    }
+
+    .page-intro-text {
+      max-width: 680px;
+      font-size: clamp(16px, 1.3vw, 21px);
+      line-height: 1.6;
+    }
+
+    /* ---------- GRILLE DE PROJETS ---------- */
+    .projects-list {
+      padding: clamp(24px, 4vh, 48px) 48px clamp(80px, 12vh, 140px);
+    }
+
+    .pgrid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(36px, 4.5vw, 72px);
+    }
+
+    .pcard {
+      display: block;
+      text-decoration: none;
+      color: #191A1E;
+    }
+
+    .pcard-media {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #191A1E;
+      background: #d9ddd9;
+      aspect-ratio: 4 / 3;
+    }
+
+    .pcard-media img,
+    .pcard-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .pcard:hover .pcard-media img,
+    .pcard:hover .pcard-media video { transform: scale(1.04); }
+
+    .pcard-cap { margin-top: 16px; }
+
+    .pcard-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: clamp(18px, 1.6vw, 24px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .pcard-name .ar {
+      width: 18px;
+      height: 18px;
+      stroke: #191A1E;
+      transition: transform 0.4s ease;
+    }
+    .pcard:hover .pcard-name .ar { transform: translate(4px, -4px); }
+
+    .pcard-tags {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.6;
+      margin-top: 8px;
+      line-height: 1.5;
+      max-width: 44ch;
+    }
+
+    /* ---------- SECTION CTA ---------- */
+    .cta {
+      background: #191A1E;
+      color: #ffffff;
+      border-top: 1px solid #191A1E;
+      padding: clamp(72px, 13vh, 170px) 48px;
+    }
+    .cta-tag {
+      display: block;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #72FF2D;
+      margin-bottom: 44px;
+    }
+    .cta-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .cta-text {
+      font-size: clamp(34px, 5.5vw, 96px);
+      font-weight: 700;
+      line-height: 0.9;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
+    }
+    .cta-arrow {
+      flex-shrink: 0;
+      width: clamp(72px, 9vw, 132px);
+      height: clamp(72px, 9vw, 132px);
+      border-radius: 50%;
+      border: 1.5px solid #ffffff;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+    }
+    .cta-arrow svg { width: 38%; height: 38%; }
+    .cta-link:hover .cta-text { transform: translateX(14px); color: #72FF2D; }
+    .cta-link:hover .cta-arrow {
+      background: #72FF2D;
+      border-color: #72FF2D;
+      color: #191A1E;
+      transform: rotate(-45deg) scale(1.05);
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      background: #191A1E;
+      color: #ffffff;
+      border-top: 1px solid #26262a;
+      padding: clamp(56px, 8vh, 96px) 48px clamp(36px, 5vh, 56px);
+    }
+    .footer-email {
+      display: inline-block;
+      font-size: clamp(26px, 3.8vw, 54px);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      color: #72ff2d;
+      text-decoration: none;
+      margin-bottom: clamp(40px, 6vh, 72px);
+      transition: opacity 0.25s ease;
+    }
+    .footer-email:hover { opacity: 0.8; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: clamp(48px, 7vh, 80px);
+    }
+    .footer-contact address { font-style: normal; line-height: 1.75; font-size: 15px; }
+    .footer-contact .hl { color: #ffffff; }
+    .footer-phone {
+      display: inline-block;
+      margin-top: 18px;
+      color: #ffffff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-size: 15px;
+      transition: color 0.25s ease;
+    }
+    .footer-phone:hover { color: #72ff2d; }
+    .footer-nav,
+    .footer-social {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+    }
+    .footer-nav a,
+    .footer-social a {
+      color: #ffffff;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+      width: fit-content;
+      transition: color 0.25s ease;
+    }
+    .footer-nav a:hover,
+    .footer-social a:hover { color: #72ff2d; }
+    .footer-col-title {
+      margin: 0;
+      color: #ffffff;
+      opacity: 0.5;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+    .footer-news { margin-bottom: clamp(44px, 6vh, 72px); }
+    .footer-news-title {
+      color: #72ff2d;
+      text-transform: uppercase;
+      font-size: clamp(15px, 1.6vw, 20px);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin: 0 0 20px;
+    }
+    .footer-news-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid #72ff2d;
+      color: #72ff2d;
+      border-radius: 999px;
+      padding: 12px 26px;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .footer-news-btn svg { width: 26px; height: 10px; stroke: currentColor; }
+    .footer-news-btn:hover { background: #72ff2d; color: #191A1E; }
+    .footer-legal { display: flex; flex-direction: column; gap: 6px; }
+    .footer-legal a {
+      color: #8a8a92;
+      text-decoration: none;
+      font-size: 13px;
+      width: fit-content;
+      transition: color 0.25s ease;
+    }
+    .footer-legal a:hover { color: #ffffff; }
+
+    /* fonds sombres pleine largeur (full-bleed), contenu aligné sur la grille 1700 */
+    .cta,
+    .footer {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      padding-left: max(48px, calc((100vw - 1700px) / 2 + 48px));
+      padding-right: max(48px, calc((100vw - 1700px) / 2 + 48px));
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 20px 24px; }
+      nav { gap: 24px; }
+      nav a span.label { display: none; }
+
+      .page-intro { padding: 56px 24px 32px; }
+      .page-title { margin-bottom: 28px; }
+      .projects-list { padding: 24px 24px 64px; }
+      .pgrid { grid-template-columns: 1fr; gap: 44px; }
+
+      .cta { padding: 64px 20px; }
+      .cta-tag { margin-bottom: 28px; }
+      .cta-link { flex-direction: column; align-items: flex-start; gap: 32px; }
+      .cta-arrow { width: 64px; height: 64px; }
+
+      .footer { padding: 56px 20px 32px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px 24px; }
+      .footer-contact { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" aria-label="Accueil Cible">
+    <svg class="logo" width="48" height="47" viewBox="0 0 48 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M40.2978 6.8251C35.8381 2.42427 29.9113 0 23.6056 0C17.2999 0 11.3731 2.42293 6.91345 6.8251C2.45652 11.2259 0 17.0781 0 23.3045C0 29.5309 2.45652 35.383 6.91345 39.7866C11.3704 44.1874 17.2999 46.6116 23.6056 46.6116C29.9113 46.6116 35.8381 44.1887 40.2978 39.7866C44.7547 35.3857 47.2099 29.5309 47.2099 23.3045C47.2099 17.0781 44.756 11.2259 40.2978 6.8251ZM23.6056 40.1915C14.1734 40.1915 6.50064 32.6167 6.50064 23.3032C6.50064 13.9896 14.1747 6.41749 23.6056 6.41749C33.0365 6.41749 40.7092 13.9923 40.7092 23.3032C40.7092 32.614 33.0351 40.1915 23.6056 40.1915Z" fill="#191A1E"/>
+      <path d="M27.1246 23.815L33.5589 24.4551C32.981 29.3905 28.7068 33.19 23.6164 33.19C18.0943 33.19 13.6036 28.7544 13.6036 23.3032C13.6036 17.8519 18.0943 13.419 23.6164 13.419C28.7068 13.419 32.9796 17.2184 33.5589 22.1538L27.1246 22.79C26.8728 21.1047 25.3962 19.8044 23.6164 19.8044C21.6607 19.8044 20.069 21.3734 20.069 23.3032C20.069 25.2329 21.6607 26.8032 23.6164 26.8032C25.3962 26.8032 26.8728 25.5029 27.1246 23.8137V23.815Z" fill="#191A1E"/>
+    </svg>
+  </a>
+
+  <nav>
+    <a href="index.html">L'agence</a>
+    <div class="nav-item">
+      <a href="#">
+        <span class="label">Expertises</span>
+        <svg class="arrow-45" width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="currentColor" stroke-width="1.3"/></svg>
+      </a>
+      <div class="submenu">
+        <a href="#">Stratégie et conseil</a>
+        <a href="#">Conception de marque</a>
+        <a href="#">Création de contenu</a>
+        <a href="#">Événement</a>
+        <a href="#">Campagne</a>
+      </div>
+    </div>
+    <a href="projets.html" class="active">Projets</a>
+    <a href="index.html#contact" class="pill-btn">
+      Contact
+      <span class="icon-circle">
+        <svg width="13" height="13" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="currentColor" stroke-width="1.3"/></svg>
+      </span>
+    </a>
+  </nav>
+</header>
+
+<div class="site-wrap">
+<section class="page-intro">
+  <p class="page-tag">— Le portfolio Cible</p>
+  <h1 class="page-title">Projets</h1>
+  <p class="page-intro-text">Dans le monde de la com’, il y a des portfolios sympas. Et puis, il y a le portfolio Cible… Des clients super chouettes qui nous ont donné des projets super chouettes qu'on a transformé en réalisations super chouettes. Bref, on trouve que cette page est vraiment super chouette. Alors, imaginez ce qu’on dira quand vous en ferez partie.</p>
+</section>
+
+<section class="projects-list" aria-label="Liste des projets">
+  <div class="pgrid">
+    <a class="pcard" href="#" aria-label="Projet Piron">
+      <div class="pcard-media">
+        <video src="assets/vignette-piron.mp4" autoplay muted loop playsinline></video>
+      </div>
+      <div class="pcard-cap">
+        <span class="pcard-name">Piron <svg class="ar" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="currentColor" stroke-width="1"/></svg></span>
+        <span class="pcard-tags">Stratégie / Conception de marque / Création de contenu / Événement / Campagne</span>
+      </div>
+    </a>
+
+    <a class="pcard" href="#" aria-label="Projet Forem">
+      <div class="pcard-media">
+        <img src="assets/forem-vignette.png" alt="Projet Forem">
+      </div>
+      <div class="pcard-cap">
+        <span class="pcard-name">Forem <svg class="ar" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="currentColor" stroke-width="1"/></svg></span>
+        <span class="pcard-tags">Campagne / Stratégie digitale / Création de contenu</span>
+      </div>
+    </a>
+
+    <a class="pcard" href="#" aria-label="Projet Marbrerie Ferrara">
+      <div class="pcard-media">
+        <img src="assets/ferrara-vignette.png" alt="Projet Marbrerie Ferrara">
+      </div>
+      <div class="pcard-cap">
+        <span class="pcard-name">Marbrerie Ferrara <svg class="ar" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="currentColor" stroke-width="1"/></svg></span>
+        <span class="pcard-tags">Site web</span>
+      </div>
+    </a>
+
+    <a class="pcard" href="#" aria-label="Projet Opéra de Liège">
+      <div class="pcard-media">
+        <video src="assets/vignette-opera.mp4" autoplay muted loop playsinline></video>
+      </div>
+      <div class="pcard-cap">
+        <span class="pcard-name">Opéra de Liège <svg class="ar" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="currentColor" stroke-width="1"/></svg></span>
+        <span class="pcard-tags">Événement</span>
+      </div>
+    </a>
+
+    <a class="pcard" href="#" aria-label="Projet Perfection Habitat">
+      <div class="pcard-media">
+        <img src="assets/vignette-perfection-habitat.png" alt="Projet Perfection Habitat">
+      </div>
+      <div class="pcard-cap">
+        <span class="pcard-name">Perfection Habitat <svg class="ar" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="currentColor" stroke-width="1"/></svg></span>
+        <span class="pcard-tags">Stratégie / Stratégie digitale / Création de contenu / Événement</span>
+      </div>
+    </a>
+
+    <a class="pcard" href="#" aria-label="Projet Intradel">
+      <div class="pcard-media">
+        <img src="assets/vignette-intradel.png" alt="Projet Intradel">
+      </div>
+      <div class="pcard-cap">
+        <span class="pcard-name">Intradel <svg class="ar" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="currentColor" stroke-width="1"/></svg></span>
+        <span class="pcard-tags">Création de contenu</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="cta">
+  <span class="cta-tag">(→) — Démarrons</span>
+  <a class="cta-link" href="index.html#contact">
+    <span class="cta-text">Votre projet<br>commence ici</span>
+    <span class="cta-arrow">
+      <svg viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="currentColor" stroke-width="1.2"/></svg>
+    </span>
+  </a>
+</section>
+
+<footer class="footer">
+  <a class="footer-email" href="mailto:hello@cible.be">hello@cible.be</a>
+
+  <div class="footer-grid">
+    <div class="footer-col footer-contact">
+      <address>
+        Parc Artisanal de Blegny, <span class="hl">11/13</span><br>
+        4671 Barchon<br>
+        Belgique
+      </address>
+      <a class="footer-phone" href="tel:+3243878707">+32 4 387 87 07</a>
+    </div>
+
+    <nav class="footer-col footer-social" aria-label="Réseaux sociaux">
+      <a href="#" target="_blank" rel="noopener">Facebook</a>
+      <a href="#" target="_blank" rel="noopener">Youtube</a>
+      <a href="#" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+
+    <nav class="footer-col footer-nav" aria-label="Naviguer">
+      <p class="footer-col-title">Naviguer</p>
+      <a href="index.html">L'agence</a>
+      <a href="#">Expertises</a>
+      <a href="projets.html">Projets</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="#">Job</a>
+    </nav>
+
+    <nav class="footer-col footer-nav" aria-label="Vous êtes curieux ?">
+      <p class="footer-col-title">Vous êtes curieux ?</p>
+      <a href="#">Smile Mag</a>
+      <a href="#">Bcorp</a>
+    </nav>
+  </div>
+
+  <div class="footer-news">
+    <p class="footer-news-title">Inscrivez-vous à notre newsletter</p>
+    <a class="footer-news-btn" href="#">
+      Rejoignez-nous
+      <svg viewBox="0 0 26 10" fill="none"><path d="M0 5H24M24 5L20 1M24 5L20 9" stroke="currentColor" stroke-width="1.2"/></svg>
+    </a>
+  </div>
+
+  <div class="footer-legal">
+    <a href="#">Mentions Légales</a>
+    <a href="#">Politique de Confidentialité</a>
+  </div>
+</footer>
+</div><!-- /.site-wrap -->
+
+<script>
+(() => {
+  const item = document.querySelector('.nav-item');
+  if (!item) return;
+  const trigger = item.querySelector('a');
+  trigger.addEventListener('click', (e) => {
+    e.preventDefault();
+    item.classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    if (!item.contains(e.target)) item.classList.remove('open');
+  });
+})();
+</script>
+</body>
+</html>
